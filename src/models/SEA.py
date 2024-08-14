@@ -318,11 +318,11 @@ class SEA(GeneralRecommender):
         t_trans2 = self.t_trans2(t_item_embeddings[:, 192:])
         v_trans2 = self.v_trans2(v_item_embeddings[:, 2048:])
 
-        # mutual information minmization loss in E1.13
+        # mutual information minmization loss in Eq.15
         loss_e1 = self.ureg * club.forward(t_trans1, t_trans2)
         loss_e2 = self.ureg * club.forward(v_trans1, v_trans2)
         
-        # negative l_2 lioss in Eq.14
+        # negative l_2 lioss in Eq.30
         # loss_e1 = - F.mse_loss(t_trans1, t_trans2)
         # loss_e1 = - F.mse_loss(v_trans1, v_trans2)
 
@@ -373,7 +373,7 @@ class SEA(GeneralRecommender):
     def print_embd(self):
         return self.result_embed_v, self.result_embed_t
     
-    # corresponds to Eq.10
+    # corresponds to Eq.16
     def Solosimloss(self, view1, view2, temperature: float, b_cos: bool = True):
         if b_cos:
             view1, view2 = F.normalize(view1, dim=1), F.normalize(view2, dim=1)
